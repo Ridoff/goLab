@@ -1,2 +1,2 @@
 # goLab
-go-lab-works
+Laboratory works using Golang programming language.
