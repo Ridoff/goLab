@@ -1,3 +1,3 @@
-module go/course/sort
+module go/course/sortition
 
 go 1.21.3
