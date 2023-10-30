@@ -1,7 +1,7 @@
 package main
 
 import (
-	"math/rand"
+    "fmt"
 )
 func findKthLargest(nums []int, k int) int {
     quickSort(nums, 0, len(nums)-1)
@@ -31,30 +31,9 @@ func partition(nums []int, left, right int) int {
     return i + 1
 }
 
-func generateRandomArray(size, maxValue int) []int {
-    arr := make([]int, size)
-    for i := 0; i < size; i++ {
-        arr[i] = rand.Intn(maxValue)
-    }
-    return arr
-}
-
 func main() {
-    var k, size int
-    _, err := fmt.Scan(k)
-    if err == nil {
-            fmt.Println("Error:", err)
-    }
-    _, erm := fmt.Scan(size)
-    if erm == nil {
-            fmt.Println("Error:", erm)
-    }
-    rand.Seed(time.Now().UnixNano())
-    maxValue := 100
-    arr := generateRandomArray(size, maxValue)
-    fmt.Println("Generated array:", arr)
-
+    arr := []int{3, 2, 1, 5, 6, 4}
+    k := 2;
     result := findKthLargest(arr, k)
-
     fmt.Printf("The %dth largest element is: %d\n", k, result)
 }
