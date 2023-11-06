@@ -1,39 +1,42 @@
 package main
 
 import (
-    "fmt"
+	"math/rand"
 )
-func findKthLargest(nums []int, k int) int {
-    quickSort(nums, 0, len(nums)-1)
-    return nums[len(nums)-k]
+
+func quickSort(arr []int, left, right int) {
+	if left < right {
+		pivotIndex := partition(arr, left, right)
+		quickSort(arr, left, pivotIndex-1)
+		quickSort(arr, pivotIndex+1, right)
+	}
 }
 
-func quickSort(nums []int, left, right int) {
-    if left < right {
-        pivotIndex := partition(nums, left, right)
-        quickSort(nums, left, pivotIndex-1)
-        quickSort(nums, pivotIndex+1, right)
-    }
+func partition(arr []int, left, right int) int {
+	pivotIndex := rand.Intn(right-left+1) + left
+	arr[pivotIndex], arr[right] = arr[right], arr[pivotIndex]
+	pivot := arr[right]
+	i := left
+	for j := left; j < right; j++ {
+		if arr[j] >= pivot {
+			arr[i], arr[j] = arr[j], arr[i]
+			i++
+		}
+	}
+	arr[i], arr[right] = arr[right], arr[i]
+	return i
 }
 
-func partition(nums []int, left, right int) int {
-    pivot := nums[right]
-    i := left - 1
-
-    for j := left; j < right; j++ {
-        if nums[j] >= pivot {
-            i++
-            nums[i], nums[j] = nums[j], nums[i]
-        }
-    }
-
-    nums[i+1], nums[right] = nums[right], nums[i+1]
-    return i + 1
-}
-
-func main() {
-    arr := []int{6, 3, 2, 5, 6, 4}
-    k := 2;
-    result := findKthLargest(arr, k)
-    fmt.Printf("The %dth largest element is: %d\n", k, result)
+func findKthLargest(arr []int, k int) int {
+	left, right := 0, len(arr)-1
+	for {
+		pivotIndex := partition(arr, left, right)
+		if pivotIndex == k-1 {
+			return arr[pivotIndex]
+		} else if pivotIndex < k-1 {
+			left = pivotIndex + 1
+		} else {
+			right = pivotIndex - 1
+		}
+	}
 }
