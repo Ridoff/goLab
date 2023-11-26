@@ -28,6 +28,7 @@ func partition(arr []int, left, right int) int {
 }
 
 func findKthLargest(arr []int, k int) int {
+
 	left, right := 0, len(arr)-1
 	for {
 		pivotIndex := partition(arr, left, right)
