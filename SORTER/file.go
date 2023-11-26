@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"math/rand"
 )
 
@@ -41,26 +40,4 @@ func findKthLargest(arr []int, k int) int {
 			right = pivotIndex - 1
 		}
 	}
-}
-
-func main() {
-	var n, k int
-	fmt.Print("Enter the size of the array: ")
-	g, _ := fmt.Scan(&n, &k)
-    if n <= 0 {
-        panic("Size")
-    }
-    fmt.Println(g)
-	arr := make([]int, n)
-	fmt.Printf("Enter %d elements separated by spaces: ", n)
-	for i := 0; i < n; i++ {
-		fmt.Scan(&arr[i])
-	}
-
-	fmt.Print("Enter the value of k: ")
-	fmt.Scan(&k)
-
-	quickSort(arr, 0, n-1)
-	kthLargest := findKthLargest(arr, k)
-	fmt.Printf("The %d-th largest element is: %d\n", k, kthLargest)
 }
